@@ -1,0 +1,105 @@
+
+ul.topnavbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+
+ul.topnavbar li {float: left;}
+
+
+ul.topnavbar li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+ul.topnavbar li a:hover {background-color: #555;}
+
+ul.topnavbar li.icon {display: none;}
+
+
+@media screen and (max-width:680px) {
+  ul.topnavbar li:not(:first-child) {display: none;}
+  ul.topnavbar li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+
+@media screen and (max-width:680px) {
+  ul.topnavbar.responsive {position: relative;}
+  ul.topnavbar.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnavbar.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnavbar.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
+.piecontainer
+{
+  text-align: center;
+  padding: 15px;  
+}
+
+.btn {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #363636;
+  font-size: 20px;
+  padding: 7px 17px 7px 17px;
+  border: solid #2f72ad 3px;
+  text-decoration: none;
+  background: #ffffff;
+}
+
+.btn:hover {
+  background: #fcf23c;
+  text-decoration: none;
+}
+
+.bar {
+  fill: steelblue;
+}
+.bar:hover {
+  fill: brown;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+.bar2-container {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 100%;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+}
