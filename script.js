@@ -1,4 +1,5 @@
 
+// responsive function for navagation menu 
 function navBarMenu() {
     var x = document.getElementById("thetopnavbar");
     if (x.className === "topnavbar") {
@@ -9,6 +10,7 @@ function navBarMenu() {
 }
 
 
+// function for live feed chart
 $(function () {
     $(document).ready(function () {
         Highcharts.setOptions({
@@ -25,14 +27,15 @@ $(function () {
                 events: {
                     load: function () {
 
-                        // set up the updating of the chart each second
+                        // This is where the function uses jQuery to call random a number from random.org and the current time
+                        
                         var series = this.series[0];
                         setInterval(function () {
                             $.get("https://www.random.org/integers/?num=1&min=1&max=200&col=1&base=10&format=plain&rnd=new", 
                                   function(data, status){
         
     
-                            var x = (new Date()).getTime(), // current time
+                            var x = (new Date()).getTime(), 
                                 y = data / 100;
                             series.addPoint([x, y], true, true);
                         });
@@ -73,7 +76,7 @@ $(function () {
             series: [{
                 name: 'Random data',
                 data: (function () {
-                    // generate an array of random data
+                    // generate an array of psuedo-random data
                     var data = [],
                         time = (new Date()).getTime(),
                         i;
@@ -91,8 +94,14 @@ $(function () {
     });
 });
 
+// This is the pie chart function
+// generation is triggered via a button click
 $("button").click(function () {
+    
+    // jQuery makes a get request to random.org for 5 numbers from 1-500 here
    $.get("https://www.random.org/integers/?num=5&min=1&max=500&col=1&base=10&format=plain&rnd=new", function(data, status){
+       
+       // the plaintext data is split into an array here
     var randarray = data.split(/\s+/);
     $('#piecontainer').highcharts({
         
@@ -124,6 +133,10 @@ $("button").click(function () {
         series: [{
             name: 'Portion of Total',
             colorByPoint: true,
+            
+            // the array is still in strings, which works for the name of each element, but the value needs to be converted
+            // to an integer
+            
             data: [{
                 name: randarray[0],
                 y: parseInt(randarray[0])
@@ -151,6 +164,8 @@ $("button").click(function () {
   });
 });
 
+
+// this is the d3 bar chart
 var margin = {top: 20, right: 20, bottom: 30, left: 40}
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -166,12 +181,12 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(10, "%");
 var svg = d3.select("body div.bar2-container").append("svg")
-    // .attr("width", width + margin.left + margin.right)
-    // .attr("height", height + margin.top + margin.bottom)
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 960 500")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    // the data is called directly from a gist in tab spaced value (tsv) format.
 d3.tsv("https://gist.githubusercontent.com/twubbles/ff6abf396e349c3b6f573b8d890081d3/raw/5b4a68dc96a8ef8247c4ef32a2c6e7264eea7f51/data.tsv", type, function(error, data) {
   x.domain(data.map(function(d) { return d.letter; }));
   y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
